@@ -31,6 +31,22 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         allFeeds.forEach(function(item) {
+           it('Object item URL is defined and is not empty', function() {
+             expect(item.url).toBeDefined();
+             expect(item.url.length > 0).toBe(true);
+           });
+
+           it('Object item name is defined and is not empty', function() {
+
+            // This is to ensure that whitespace is not counted as content
+             var nameTrimmed = item.name.trim();
+
+             expect(nameTrimmed).toBeDefined();
+             expect(nameTrimmed.length > 0).toBe(true);
+           });
+
+         })
 
 
         /* TODO: Write a test that loops through each feed
