@@ -26,11 +26,6 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
          allFeeds.forEach(function(item) {
            it('Object item URL is defined and is not empty', function() {
              expect(item.url).toBeDefined();
@@ -48,11 +43,6 @@ $(function() {
 
          })
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
     });
 
 
@@ -70,6 +60,28 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
 
+          const menuIcon = $('.menu-icon-link');
+          const domBody = document.body;
+
+          describe('The menu', function() {
+
+            it('Menu hidden by default', function() {
+
+              // We want to check that the body does not have the class "menu-hidden"
+              // get the body
+              // get its class list
+
+              expect(domBody.classList.contains("menu-hidden")).toBe(true);
+
+            });
+
+            it('Menu is visible after menu click', function() {
+              menuIcon.trigger('click');
+              expect(domBody.classList.contains("menu-hidden")).toBe(false);
+            });
+
+          })
+
     /* TODO: Write a new test suite named "Initial Entries" */
 
         /* TODO: Write a test that ensures when the loadFeed
@@ -78,6 +90,10 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+         describe('Iniital Entries', function() {
+
+         });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
