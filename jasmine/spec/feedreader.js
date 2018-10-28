@@ -51,6 +51,7 @@ $(function() {
     /* TODO: Write a new test suite named "The menu" */
 
     const menuIcon = $('.menu-icon-link');
+    const menuLink = $('.feed-list a');
     const domBody = document.body;
 
     describe('The menu', function() {
@@ -86,17 +87,18 @@ $(function() {
     })
 
 
-    beforeEach(function(done) {
-
-      loadFeed(1, function(){
-        done();
-      });
-
-    });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
    describe('Iniital Entries', function() {
+
+     beforeEach(function(done) {
+
+       loadFeed(0, function(){
+         done();
+       });
+
+     });
 
      /* TODO: Write a test that ensures when the loadFeed
       * function is called and completes its work, there is at least
@@ -105,19 +107,23 @@ $(function() {
       * the use of Jasmine's beforeEach and asynchronous done() function.
       */
 
-     it('Feed Container has one entry', function() {
+     it('Feed Container has one entry', function(done) {
 
        // After the loadFeed() function runs there is one .entry item in the list
        const feedEntries = document.querySelectorAll('.entry');
        feedEntries.length;
 
        expect(feedEntries.length > 0).toBe(true);
+       done();
 
      });
 
    });
 
   /* TODO: Write a new test suite named "New Feed Selection" */
+  // Get the first item from the list of old entries
+
+  let firstItem = '';
 
    describe('New Feed Selection', function() {
 
@@ -126,7 +132,27 @@ $(function() {
       * Remember, loadFeed() is asynchronous.
       */
 
-      it('Content Change in the load feed', function() {
+
+      beforeEach(function(done) {
+
+        // Get the initial fisrt item before we change the list of entries
+        firstItem = document.querySelector('.entry').innerText;
+
+        $('.feed').empty();
+
+        loadFeed(2, function(){
+          done();
+        });
+
+      });
+
+      it('Content Change in the load feed', function(done) {
+
+        // we're now getting the new list of entries that have changed
+        const newFirstItem = document.querySelector('.entry').innerText;
+
+        expect( newFirstItem === firstItem ).not.toBe(true);
+        done();
 
       });
 
