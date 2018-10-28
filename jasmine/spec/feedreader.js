@@ -82,6 +82,10 @@ $(function() {
       it('Menu is visible after menu click', function() {
         menuIcon.trigger('click');
         expect(domBody.classList.contains("menu-hidden")).toBe(false);
+
+        menuIcon.trigger('click');
+        expect(domBody.classList.contains("menu-hidden")).toBe(true);
+
       });
 
     })
@@ -121,7 +125,6 @@ $(function() {
    });
 
   /* TODO: Write a new test suite named "New Feed Selection" */
-  // Get the first item from the list of old entries
 
   let firstItem = '';
 
