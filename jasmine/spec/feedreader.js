@@ -48,36 +48,16 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
-
-    const menuIcon = $('.menu-icon-link');
-    const menuLink = $('.feed-list a');
-    const domBody = document.body;
-
     describe('The menu', function() {
 
-      /* TODO: Write a test that ensures the menu element is
-       * hidden by default. You'll have to analyze the HTML and
-       * the CSS to determine how we're performing the
-       * hiding/showing of the menu element.
-       */
+      const menuIcon = $('.menu-icon-link');
+      const domBody = document.body;
 
       it('Menu hidden by default', function() {
-
-        // We want to check that the body does not have the class "menu-hidden"
-        // get the body
-        // get its class list
 
         expect(domBody.classList.contains("menu-hidden")).toBe(true);
 
       });
-
-
-     /* TODO: Write a test that ensures the menu changes
-      * visibility when the menu icon is clicked. This test
-      * should have two expectations: does the menu display when
-      * clicked and does it hide when clicked again.
-      */
 
       it('Menu is visible after menu click', function() {
         menuIcon.trigger('click');
@@ -90,10 +70,6 @@ $(function() {
 
     })
 
-
-
-    /* TODO: Write a new test suite named "Initial Entries" */
-
    describe('Iniital Entries', function() {
 
      beforeEach(function(done) {
@@ -104,18 +80,10 @@ $(function() {
 
      });
 
-     /* TODO: Write a test that ensures when the loadFeed
-      * function is called and completes its work, there is at least
-      * a single .entry element within the .feed container.
-      * Remember, loadFeed() is asynchronous so this test will require
-      * the use of Jasmine's beforeEach and asynchronous done() function.
-      */
-
      it('Feed Container has one entry', function(done) {
 
        // After the loadFeed() function runs there is one .entry item in the list
-       const feedEntries = document.querySelectorAll('.entry');
-       feedEntries.length;
+       const feedEntries = document.querySelectorAll('.feed .entry');
 
        expect(feedEntries.length > 0).toBe(true);
        done();
@@ -130,21 +98,19 @@ $(function() {
 
    describe('New Feed Selection', function() {
 
-     /* TODO: Write a test that ensures when a new feed is loaded
-      * by the loadFeed function that the content actually changes.
-      * Remember, loadFeed() is asynchronous.
-      */
-
+     // Running loadfeed twice inside this test suite to ensure that this is not
+     // dependent on the other tests.
 
       beforeEach(function(done) {
 
-        // Get the initial fisrt item before we change the list of entries
-        firstItem = document.querySelector('.entry').innerText;
+        // We first refresh the feed inside this suite
+        loadFeed(0, function() {
+          // Get the initial fisrt item before we change the list of entries
+          firstItem = document.querySelector('.entry').innerText;
 
-        $('.feed').empty();
-
-        loadFeed(2, function(){
-          done();
+          loadFeed(2, function() {
+            done();
+          });
         });
 
       });
